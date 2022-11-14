@@ -1,35 +1,102 @@
-* {
-    background-color: transparent;
+// 변수 선언
+$main_color: #FF9800;
+
+$header_height: 65px;
+$ecpt_border: 8px;
+$sidebar_width: 25%;
+$icon_gap: 30px;
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-html, body {
+@mixin flex-vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+* {
+    background-color: transparent;
     margin: 0;
-    width: 100%;
-    height: 100%;
+    padding: 0;
 }
 
 #root {
-    height: 100%;
-}
+    width: 100vw;
+    height: 100vh;
 
-header {
-    height: 50px;
+    #editor {
+        width: inherit;
+        height: inherit;
 
-    box-shadow: 0px 4px 0px orange;
-}
+        header {
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr 2fr 1fr;
+            width: inherit;
+            height: $header_height;
+            box-shadow: 0px 4px 0px $main_color;
 
-section {
-    .sidebar {
-        display: inline-block;
-        height: 100vh;
-        width: 20vw;
-    }
+            .iconBox {
+                button {
+                    border: none;
+                }
+            }
 
-    .editor {
-        display: inline-block;
-        height: 100vh;
-        width: 80vw;
-        box-shadow: 0px 4px 0px orange;
+            .r_IconBox {
+                @include flex-vertical-center();
+                button {
+                    margin-left: $icon_gap;
+                    img {
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+            }
+
+            .logo {
+                @include flex-center();
+                img {
+                    width: 58px;
+                    height: 48px;
+                }
+            }
+
+            .l_IconBox {
+                @include flex-vertical-center();
+                justify-content: flex-end;
+                button {
+                    margin-right: $icon_gap;
+                    img {
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+            }
+        }
+        
+        section {
+            height: calc(100% - $header_height);
+            .sectionBox {
+                height: 100%;
+                .sidebar {
+                    display: inline-block;
+                    margin-top: calc($ecpt_border/2);
+                    width: $sidebar_width;
+                    height: calc(100% - ($ecpt_border/2));
+                }
+            
+                .editor {
+                    display: inline-block;
+                    background-color: #EEEEEE;
+                    width: calc((100% - $sidebar_width) - $ecpt_border);
+                    height: calc(100% - $ecpt_border);
+                    border: 4px solid $main_color;
+                }
+            }
+        }
     }
 }
 

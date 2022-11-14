@@ -1,5 +1,5 @@
 import './App.css';
-import Editor from './pages/editor'
+import Editor from './pages/Editor'
 import { Route, Routes } from 'react-router-dom'
 
 function App() {

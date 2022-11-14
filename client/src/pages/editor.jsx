@@ -17,39 +17,39 @@ const editor = () => {
   return (
     <div id="editor">
       <header>
-        <div class="r_IconBox iconBox">
-          <button class="layout" type="button">
+        <div className="r_IconBox iconBox">
+          <button className="layout" type="button">
             <img src={layoutIcon} alt="layout.png" />
           </button>
-          <button class="camera" type="button">
+          <button className="camera" type="button">
             <img src={cameraIcon} alt="camera.png" />
           </button>
-          <button class="message" type="button">
+          <button className="message" type="button">
             <img src={messageIcon} alt="message.png" />
           </button>
-          <button class="text" type="button">
+          <button className="text" type="button">
             <img src={textIcon} alt="text.png" />
           </button>
         </div>
-        <div class="logo">
+        <div className="logo">
           <img src={logo} alt="logo.png" />
         </div>
-        <div class="l_IconBox iconBox">
-          <button class="save" type="button">
+        <div className="l_IconBox iconBox">
+          <button className="save" type="button">
             <img src={saveIcon} alt="save.png" />
           </button>
-          <button class="share" type="button">
+          <button className="share" type="button">
             <img src={shareIcon} alt="share.png" />
           </button>
-          <button class="download" type="button">
+          <button className="download" type="button">
             <img src={downloadIcon} alt="download.png" />
           </button>
         </div>
       </header>
       <section>
-        <div class="sectionBox">
-          <div class="sidebar">사이드 바</div>
-          <div class="editor">에디터 창</div>
+        <div className="sectionBox">
+          <div className="sidebar">사이드 바</div>
+          <div className="editor">에디터 창</div>
         </div>
       </section>
     </div>
