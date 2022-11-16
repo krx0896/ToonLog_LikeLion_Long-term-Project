@@ -10,11 +10,8 @@ import saveIcon from "../images/icon/save.png";
 import shareIcon from "../images/icon/share.png";
 import downloadIcon from "../images/icon/download.png";
 
-
 // 말풍선 svg 파일
 // import { ReactComponent as Bubble1 } from "../images/bubble/bubble1.svg";
-
-
 
 // css 파일
 import "../styles/css/editor.css";
@@ -26,7 +23,6 @@ import SpeechBubble from "../components/SpeechBubble";
 import Text from "../components/Text";
 
 const Editor = () => {
-
   const [frameBtn, setFrameBtn] = useState(true);
   const [pictureBtn, setPictureBtn] = useState(false);
   const [bubbleBtn, setBubbleBtn] = useState(false);
@@ -38,7 +34,7 @@ const Editor = () => {
     setBubbleBtn(false);
     setTextBtn(false);
 
-    switch(btn){
+    switch (btn) {
       case "Frame":
         setFrameBtn(true);
         break;
@@ -52,22 +48,22 @@ const Editor = () => {
         setTextBtn(true);
         break;
     }
-  }
+  };
 
   return (
     <div id="editor">
       <header>
         <div className="r_IconBox iconBox">
-          <button className="layout" type="button" onClick={()=>btnControl('Frame')}>
+          <button className="layout" type="button" onClick={() => btnControl("Frame")}>
             <img src={layoutIcon} alt="layout.png" />
           </button>
-          <button className="camera" type="button" onClick={()=>btnControl('Picture')} >
+          <button className="camera" type="button" onClick={() => btnControl("Picture")}>
             <img src={cameraIcon} alt="camera.png" />
           </button>
-          <button className="message" type="button" onClick={()=>btnControl('Bubble')} >
+          <button className="message" type="button" onClick={() => btnControl("Bubble")}>
             <img src={messageIcon} alt="message.png" />
           </button>
-          <button className="text" type="button" onClick={()=>btnControl('Text')}>
+          <button className="text" type="button" onClick={() => btnControl("Text")}>
             <img src={textIcon} alt="text.png" />
           </button>
         </div>
@@ -88,7 +84,6 @@ const Editor = () => {
       </header>
       <section>
         <div className="sectionBox">
-
           <div className="sidebar">
             {frameBtn && <Frame />}
             {pictureBtn && <Picture />}
@@ -96,7 +91,6 @@ const Editor = () => {
             {textBtn && <Text />}
           </div>
           <div className="editor">에디터 창</div>
-
         </div>
       </section>
     </div>

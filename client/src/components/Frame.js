@@ -1,12 +1,15 @@
 
 function Frame() {
-    return (
-      <>
-          <h1>Frame 컴포넌트 창입니다.</h1>
-      </>
-    );
-  }
-  
-  export default Frame;
-  
-  
+  return (
+    <>
+      <section>
+        <div className="frame">
+          <img src="../images/frame/Frame1"></img>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default Frame;
+
