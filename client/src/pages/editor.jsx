@@ -10,6 +10,12 @@ import saveIcon from "../images/icon/save.png";
 import shareIcon from "../images/icon/share.png";
 import downloadIcon from "../images/icon/download.png";
 
+
+// 말풍선 svg 파일
+// import { ReactComponent as Bubble1 } from "../images/bubble/bubble1.svg";
+
+
+
 // css 파일
 import "../styles/css/editor.css";
 
@@ -82,6 +88,7 @@ const Editor = () => {
       </header>
       <section>
         <div className="sectionBox">
+
           <div className="sidebar">
             {frameBtn && <Frame />}
             {pictureBtn && <Picture />}
@@ -89,10 +96,9 @@ const Editor = () => {
             {textBtn && <Text />}
           </div>
           <div className="editor">에디터 창</div>
+
         </div>
       </section>
     </div>
   );
 };
-
-export default Editor;
