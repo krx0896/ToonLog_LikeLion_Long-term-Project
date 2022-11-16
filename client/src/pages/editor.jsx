@@ -26,20 +26,42 @@ const Editor = () => {
   const [bubbleBtn, setBubbleBtn] = useState(false);
   const [textBtn, setTextBtn] = useState(false);
 
+  const btnControl = (btn) => {
+    setFrameBtn(false);
+    setPictureBtn(false);
+    setBubbleBtn(false);
+    setTextBtn(false);
+
+    switch(btn){
+      case "Frame":
+        setFrameBtn(true);
+        break;
+      case "Picture":
+        setPictureBtn(true);
+        break;
+      case "Bubble":
+        setBubbleBtn(true);
+        break;
+      case "Text":
+        setTextBtn(true);
+        break;
+    }
+  }
+
   return (
     <div id="editor">
       <header>
         <div className="r_IconBox iconBox">
-          <button className="layout" type="button">
+          <button className="layout" type="button" onClick={()=>btnControl('Frame')}>
             <img src={layoutIcon} alt="layout.png" />
           </button>
-          <button className="camera" type="button">
+          <button className="camera" type="button" onClick={()=>btnControl('Picture')} >
             <img src={cameraIcon} alt="camera.png" />
           </button>
-          <button className="message" type="button">
+          <button className="message" type="button" onClick={()=>btnControl('Bubble')} >
             <img src={messageIcon} alt="message.png" />
           </button>
-          <button className="text" type="button">
+          <button className="text" type="button" onClick={()=>btnControl('Text')}>
             <img src={textIcon} alt="text.png" />
           </button>
         </div>
@@ -61,10 +83,10 @@ const Editor = () => {
       <section>
         <div className="sectionBox">
           <div className="sidebar">
-            <Frame />
-            <Picture />
-            <SpeechBubble />
-            <Text />
+            {frameBtn && <Frame />}
+            {pictureBtn && <Picture />}
+            {bubbleBtn && <SpeechBubble />}
+            {textBtn && <Text />}
           </div>
           <div className="editor">에디터 창</div>
         </div>
