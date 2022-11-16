@@ -60,6 +60,7 @@
 }
 #root #editor section .sectionBox {
   height: 100%;
+  display: flex;
 }
 #root #editor section .sectionBox .sidebar {
   display: inline-block;

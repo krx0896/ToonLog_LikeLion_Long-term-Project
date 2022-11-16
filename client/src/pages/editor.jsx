@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // 이미지 파일
 import logo from "../images/logo.png";
@@ -13,7 +13,19 @@ import downloadIcon from "../images/icon/download.png";
 // css 파일
 import "../styles/css/editor.css";
 
-const editor = () => {
+// components 파일
+import Frame from "../components/Frame";
+import Picture from "../components/Picture";
+import SpeechBubble from "../components/SpeechBubble";
+import Text from "../components/Text";
+
+const Editor = () => {
+
+  const [frameBtn, setFrameBtn] = useState(true);
+  const [pictureBtn, setPictureBtn] = useState(false);
+  const [bubbleBtn, setBubbleBtn] = useState(false);
+  const [textBtn, setTextBtn] = useState(false);
+
   return (
     <div id="editor">
       <header>
@@ -48,7 +60,12 @@ const editor = () => {
       </header>
       <section>
         <div className="sectionBox">
-          <div className="sidebar">사이드 바</div>
+          <div className="sidebar">
+            <Frame />
+            <Picture />
+            <SpeechBubble />
+            <Text />
+          </div>
           <div className="editor">에디터 창</div>
         </div>
       </section>
@@ -56,4 +73,4 @@ const editor = () => {
   );
 };
 
-export default editor;
+export default Editor;

@@ -81,6 +81,7 @@ $icon_gap: 30px;
             height: calc(100% - $header_height);
             .sectionBox {
                 height: 100%;
+                display: flex;
                 .sidebar {
                     display: inline-block;
                     margin-top: calc($ecpt_border/2);
