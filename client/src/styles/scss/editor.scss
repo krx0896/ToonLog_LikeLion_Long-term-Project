@@ -6,6 +6,7 @@ $ecpt_border: 8px;
 $sidebar_width: 25%;
 $icon_gap: 30px;
 
+
 @mixin flex-center {
     display: flex;
     align-items: center;
@@ -82,11 +83,55 @@ $icon_gap: 30px;
             .sectionBox {
                 height: 100%;
                 display: flex;
+
                 .sidebar {
-                    display: inline-block;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    
+                    padding: 15px 0 0 0;
                     margin-top: calc($ecpt_border/2);
                     width: $sidebar_width;
                     height: calc(100% - ($ecpt_border/2));
+
+                    // 왼쪽 사이드 검색바
+                    .inputbox {
+                        width: 83%;
+                        height: 25px;
+                    } 
+
+                    // 말풍선 각 요소들의 박스
+                    .sidebox {
+                        display: flex;
+                        flex-wrap: wrap;
+
+
+                        width: 83%;
+                        margin-top: 15px;
+                    }
+
+                    .bubbleBox {
+                        position: relative;
+                        width: 45%;
+                    }
+
+                    .bubbleBox::after {
+                        display: block;
+                        content: "";
+                        padding-bottom: 100%;
+                      }
+
+                    .bubble {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+
+
                 }
             
                 .editor {
