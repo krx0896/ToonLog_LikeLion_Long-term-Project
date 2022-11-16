@@ -99,7 +99,11 @@ const Editor = () => {
             {bubbleBtn && <SpeechBubble />}
             {textBtn && <Text />}
           </div>
-          <div className="editor">에디터 창</div>
+          <div className="editor">
+            <canvas className="canvas" id="canvas" style= {{width: '600px', height: '800px', backgroundColor: 'white' }} type='file' name='imageFile' accept='image/jpeg, image/jp, image/png'></canvas>
+
+
+          </div>
 
         </div>
       </section>
