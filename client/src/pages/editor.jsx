@@ -9,6 +9,10 @@ import textIcon from "../images/icon/text.png";
 import saveIcon from "../images/icon/save.png";
 import shareIcon from "../images/icon/share.png";
 import downloadIcon from "../images/icon/download.png";
+import cameraIcon2 from "../images/icon/camera-2.png";
+import layoutIcon2 from "../images/icon/layout-2.png";
+import messageIcon2 from "../images/icon/message-2.png";
+import textIcon2 from "../images/icon/text-2.png";
 
 // 말풍선 svg 파일
 // import { ReactComponent as Bubble1 } from "../images/bubble/bubble1.svg";
@@ -55,18 +59,19 @@ const Editor = () => {
       <header>
         <div className="r_IconBox iconBox">
           <button className="layout" type="button" onClick={() => btnControl("Frame")}>
-            <img src={layoutIcon} alt="layout.png" />
+            {frameBtn ? <img src={layoutIcon} /> : <img src={layoutIcon2} />}
           </button>
           <button className="camera" type="button" onClick={() => btnControl("Picture")}>
-            <img src={cameraIcon} alt="camera.png" />
+            {pictureBtn ? <img src={cameraIcon2} /> : <img src={cameraIcon} />}
           </button>
           <button className="message" type="button" onClick={() => btnControl("Bubble")}>
-            <img src={messageIcon} alt="message.png" />
+            {bubbleBtn ? <img src={messageIcon2} /> : <img src={messageIcon} />}
           </button>
           <button className="text" type="button" onClick={() => btnControl("Text")}>
-            <img src={textIcon} alt="text.png" />
+            {textBtn ? <img src={textIcon2} /> : <img src={textIcon} />}
           </button>
         </div>
+
         <div className="logo">
           <img src={logo} alt="logo.png" />
         </div>
