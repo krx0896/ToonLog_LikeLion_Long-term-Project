@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // 이미지 파일
 import logo from "../images/logo.png";
@@ -14,9 +14,6 @@ import layoutIcon2 from "../images/icon/layout-2.png";
 import messageIcon2 from "../images/icon/message-2.png";
 import textIcon2 from "../images/icon/text-2.png";
 
-
-// 말풍선 svg 파일
-// import { ReactComponent as Bubble1 } from "../images/bubble/bubble1.svg";
 
 
 
@@ -57,6 +54,70 @@ const Editor = () => {
         break;
     }
   }
+  
+  const canvasId = React.useRef(null);
+
+  var x = 300;
+  var y = 300;
+  var width;
+  var height;
+  var canvas;
+  var ctx;
+  const img = new Image();
+  img.src = "bubble/bubble1-squ.png";
+
+
+  const createBubble = (x, y, width, height) => {
+    var canvas = canvasId.current;
+    var ctx = canvas.getContext('2d');
+
+    ctx.clearRect(x, y, width, height);
+    ctx.beginPath();
+
+    ctx.drawImage(img, x, y, width, height);
+    
+    return (width, height)
+  }
+
+  // canvas.onmousedown = function(){
+  //   var canvas = canvasId.current;
+  //   var ctx = canvas.getContext('2d');
+
+  //   canvas.onmousemove = function(event){
+      
+  //     var x = event.clientX - ctx.canvas.offsetLeft;
+  //     var y = event.clientY - ctx.canvas.offsetTop;
+      
+  //     createBubble(x, y, width, height);
+  //   }
+  // }
+  
+
+  const canvasOnmousedown = () => {
+    var canvas = canvasId.current;
+    var ctx = canvas.getContext('2d');
+
+    canvas.onmousedown = function(){
+      var canvas = canvasId.current;
+      var ctx = canvas.getContext('2d');
+  
+      canvas.onmousemove = function(event){
+        
+        var x = event.clientX - ctx.canvas.offsetLeft;
+        var y = event.clientY - ctx.canvas.offsetTop;
+        
+        createBubble(x, y, width, height);
+      }
+    }
+  }
+
+  const removeBubble = () => {
+    var canvas = canvasId.current;
+    var ctx = canvas.getContext('2d');
+
+    ctx.clearRect(x, y, 500, 500);
+    ctx.beginPath();
+  }
 
   return (
     <div id="editor">
@@ -79,13 +140,25 @@ const Editor = () => {
           <img src={logo} alt="logo.png" />
         </div>
         <div className="l_IconBox iconBox">
-          <button className="save" type="button">
+          <button className="save" type="button"
+                  onClick={() => {
+                    canvasOnmousedown();
+                  }}
+                  >
             <img src={saveIcon} alt="save.png" />
           </button>
-          <button className="share" type="button">
+          <button className="share" type="button"
+                  onClick={() => {
+                    createBubble(x, y, width=500, height=500);
+                  }}
+                  >
             <img src={shareIcon} alt="share.png" />
           </button>
-          <button className="download" type="button">
+          <button className="download" type="button"
+                                    onClick={() => {
+                                      removeBubble();
+                                    }}
+                                    >
             <img src={downloadIcon} alt="download.png" />
           </button>
         </div>
@@ -100,14 +173,22 @@ const Editor = () => {
             {textBtn && <Text />}
           </div>
           <div className="editor">
-            <canvas className="canvas" id="canvas" style= {{width: '600px', height: '800px', backgroundColor: 'white' }} type='file' name='imageFile' accept='image/jpeg, image/jp, image/png'></canvas>
 
+
+            <canvas
+              width="1300"
+              height="1920"
+              ref={canvasId}
+              className="canvas"
+              style= {{width: '450px', height: '600px', backgroundColor: 'white' }}
+            />
 
           </div>
 
         </div>
       </section>
     </div>
+
   );
 };
 
