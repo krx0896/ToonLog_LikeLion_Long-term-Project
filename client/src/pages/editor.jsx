@@ -14,11 +14,8 @@ import layoutIcon2 from "../images/icon/layout-2.png";
 import messageIcon2 from "../images/icon/message-2.png";
 import textIcon2 from "../images/icon/text-2.png";
 
-
 // 말풍선 svg 파일
 // import { ReactComponent as Bubble1 } from "../images/bubble/bubble1.svg";
-
-
 
 // css 파일
 import "../styles/css/editor.css";
@@ -30,7 +27,6 @@ import SpeechBubble from "../components/SpeechBubble";
 import Text from "../components/Text";
 
 const Editor = () => {
-
   const [frameBtn, setFrameBtn] = useState(true);
   const [pictureBtn, setPictureBtn] = useState(false);
   const [bubbleBtn, setBubbleBtn] = useState(false);
@@ -42,7 +38,7 @@ const Editor = () => {
     setBubbleBtn(false);
     setTextBtn(false);
 
-    switch(btn){
+    switch (btn) {
       case "Frame":
         setFrameBtn(true);
         break;
@@ -56,25 +52,26 @@ const Editor = () => {
         setTextBtn(true);
         break;
     }
-  }
+  };
 
   return (
     <div id="editor">
       <header>
         <div className="r_IconBox iconBox">
-          <button className="layout" type="button" onClick={()=>btnControl('Frame')}>
+          <button className="layout" type="button" onClick={() => btnControl("Frame")}>
             {frameBtn ? <img src={layoutIcon} /> : <img src={layoutIcon2} />}
           </button>
-          <button className="camera" type="button" onClick={()=>btnControl('Picture')} >
+          <button className="camera" type="button" onClick={() => btnControl("Picture")}>
             {pictureBtn ? <img src={cameraIcon2} /> : <img src={cameraIcon} />}
           </button>
-          <button className="message" type="button" onClick={()=>btnControl('Bubble')} >
+          <button className="message" type="button" onClick={() => btnControl("Bubble")}>
             {bubbleBtn ? <img src={messageIcon2} /> : <img src={messageIcon} />}
           </button>
-          <button className="text" type="button" onClick={()=>btnControl('Text')}>
+          <button className="text" type="button" onClick={() => btnControl("Text")}>
             {textBtn ? <img src={textIcon2} /> : <img src={textIcon} />}
           </button>
         </div>
+
         <div className="logo">
           <img src={logo} alt="logo.png" />
         </div>
@@ -92,7 +89,6 @@ const Editor = () => {
       </header>
       <section>
         <div className="sectionBox">
-
           <div className="sidebar">
             {frameBtn && <Frame />}
             {pictureBtn && <Picture />}
@@ -100,11 +96,15 @@ const Editor = () => {
             {textBtn && <Text />}
           </div>
           <div className="editor">
-            <canvas className="canvas" id="canvas" style= {{width: '600px', height: '800px', backgroundColor: 'white' }} type='file' name='imageFile' accept='image/jpeg, image/jp, image/png'></canvas>
-
-
+            <canvas
+              className="canvas"
+              id="canvas"
+              style={{ width: "600px", height: "800px", backgroundColor: "white" }}
+              type="file"
+              name="imageFile"
+              accept="image/jpeg, image/jp, image/png"
+            ></canvas>
           </div>
-
         </div>
       </section>
     </div>
