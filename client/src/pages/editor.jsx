@@ -28,11 +28,6 @@ import Text from "../components/Text";
 import { useEffect } from "react";
 
 const Editor = () => {
-<<<<<<< Updated upstream
-=======
-
-  // Icon Button 관리
->>>>>>> Stashed changes
   const [frameBtn, setFrameBtn] = useState(true);
   const [pictureBtn, setPictureBtn] = useState(false);
   const [bubbleBtn, setBubbleBtn] = useState(false);
@@ -69,22 +64,22 @@ const Editor = () => {
 
   const getFont = (font) => {
     setFont(font);
-  }
+  };
   const getSize = (size) => {
     setSize(size);
-  }
+  };
   const getIsBold = (isBold) => {
     setIsBold(isBold);
-  }
+  };
   const getIsItalic = (isItalic) => {
     setIsItalic(isItalic);
-  }
+  };
   const getIsUnderline = (isUnderline) => {
     setIsUnderline(isUnderline);
-  }
+  };
 
   // canvas 기능
-  
+
   // useEffect(() => {
   //   const canvasEle = canvas.current;
   //   canvasEle.width = canvasEle.clientWidth;
@@ -111,8 +106,6 @@ const Editor = () => {
   //   writeText({ text: 'input box', x: 28, y: 70 });
   //   // writeText({ text: ~~~~value ~~~~, x: 18, y: 70 });
   // }, []);
-
-
 
   return (
     <div id="editor">
@@ -153,16 +146,17 @@ const Editor = () => {
             {frameBtn && <Frame />}
             {pictureBtn && <Picture />}
             {bubbleBtn && <SpeechBubble />}
-            {textBtn && <Text
-            getFont={getFont}
-            getSize={getSize}
-            getIsBold={getIsBold}
-            getIsItalic={getIsItalic}
-            getIsUnderline={getIsUnderline}
-            />}
+            {textBtn && (
+              <Text
+                getFont={getFont}
+                getSize={getSize}
+                getIsBold={getIsBold}
+                getIsItalic={getIsItalic}
+                getIsUnderline={getIsUnderline}
+              />
+            )}
           </div>
           <div className="editor">
-<<<<<<< Updated upstream
             <canvas
               className="canvas"
               id="canvas"
@@ -171,11 +165,6 @@ const Editor = () => {
               name="imageFile"
               accept="image/jpeg, image/jp, image/png"
             ></canvas>
-=======
-            <body>
-            <canvas  className="canvas" id="canvas" style= {{width: '300px', height: '400px', backgroundColor: 'white' }} type='file' name='imageFile' accept='image/jpeg, image/jp, image/png'></canvas>
-            </body>
->>>>>>> Stashed changes
           </div>
         </div>
       </section>
