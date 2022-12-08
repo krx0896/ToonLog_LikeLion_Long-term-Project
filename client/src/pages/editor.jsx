@@ -26,7 +26,10 @@ import Picture from "../components/Picture";
 import SpeechBubble from "../components/SpeechBubble";
 import Text from "../components/Text";
 
+
 const Editor = () => {
+
+  // Icon Button 관리
   const [frameBtn, setFrameBtn] = useState(true);
   const [pictureBtn, setPictureBtn] = useState(false);
   const [bubbleBtn, setBubbleBtn] = useState(false);
@@ -53,6 +56,60 @@ const Editor = () => {
         break;
     }
   }
+
+  // Text 기능
+  const [font, setFont] = useState("inter");
+  const [size, setSize] = useState(12);
+  const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
+  const [isUnderline, setIsUnderline] = useState(false);
+
+  const getFont = (font) => {
+    setFont(font);
+  }
+  const getSize = (size) => {
+    setSize(size);
+  }
+  const getIsBold = (isBold) => {
+    setIsBold(isBold);
+  }
+  const getIsItalic = (isItalic) => {
+    setIsItalic(isItalic);
+  }
+  const getIsUnderline = (isUnderline) => {
+    setIsUnderline(isUnderline);
+  }
+
+  // canvas 기능
+  
+  // useEffect(() => {
+  //   const canvasEle = canvas.current;
+  //   canvasEle.width = canvasEle.clientWidth;
+  //   canvasEle.height = canvasEle.clientHeight;
+
+  //   ctx = canvasEle.getContext("2d");
+  // }, []);
+
+  // const writeText = (info, style = {}) => {
+  //   const { text, x, y } = info;
+  //   const { fontSize = 20, fontFamily = 'Arial', color = 'black', textAlign = 'left', textBaseline = 'top' } = style;
+  //   // const { fontSize = size, fontFamily = font, color = 'black', textAlign = 'left', textBaseline = 'top' } = style;
+
+  //   ctx.beginPath();
+  //   ctx.font = fontSize + 'px ' + fontFamily;
+  //   ctx.textAlign = textAlign;
+  //   ctx.textBaseline = textBaseline;
+  //   ctx.fillStyle = color;
+  //   ctx.fillText(text, x, y);
+  //   ctx.stroke();
+  // }
+
+//   useEffect(() => {
+//     writeText({ text: 'input box', x: 28, y: 70 });
+//     writeText({ text: ~~~~value ~~~~, x: 18, y: 70 });
+//     }, []);
+
+// -------------------------- 민혁 파트 -------------------------
   
   const canvasId = React.useRef(null);
 
@@ -77,48 +134,6 @@ const Editor = () => {
     
     return (width, height)
   }
-
-  const getFont = (font) => {
-    setFont(font);
-  };
-  const getSize = (size) => {
-    setSize(size);
-  };
-  const getIsBold = (isBold) => {
-    setIsBold(isBold);
-  };
-  const getIsItalic = (isItalic) => {
-    setIsItalic(isItalic);
-  };
-  const getIsUnderline = (isUnderline) => {
-    setIsUnderline(isUnderline);
-  };
-
-  // canvas 기능
-
-  // useEffect(() => {
-  //   const canvasEle = canvas.current;
-  //   canvasEle.width = canvasEle.clientWidth;
-  //   canvasEle.height = canvasEle.clientHeight;
-
-  //   ctx = canvasEle.getContext("2d");
-  // }, []);
-
-  // const writeText = (info, style = {}) => {
-  //   const { text, x, y } = info;
-  //   const { fontSize = 20, fontFamily = 'Arial', color = 'black', textAlign = 'left', textBaseline = 'top' } = style;
-  //   // const { fontSize = size, fontFamily = font, color = 'black', textAlign = 'left', textBaseline = 'top' } = style;
-
-  //   ctx.beginPath();
-  //   ctx.font = fontSize + 'px ' + fontFamily;
-  //   ctx.textAlign = textAlign;
-  //   ctx.textBaseline = textBaseline;
-  //   ctx.fillStyle = color;
-  //   ctx.fillText(text, x, y);
-  //   ctx.stroke();
-
-  // }
-  
 
   const canvasOnmousedown = () => {
     var canvas = canvasId.current;
@@ -146,6 +161,9 @@ const Editor = () => {
     ctx.clearRect(x, y, 500, 500);
     ctx.beginPath();
   }
+
+// -------------------------- 민혁 파트 끝 -------------------------
+
 
   return (
     <div id="editor">
@@ -198,32 +216,29 @@ const Editor = () => {
             {frameBtn && <Frame />}
             {pictureBtn && <Picture />}
             {bubbleBtn && <SpeechBubble />}
-            {textBtn && <Text />}
+            {textBtn && <Text
+                            getFont={getFont}
+                            getSize={getSize}
+                            getIsBold={getIsBold}
+                            getIsItalic={getIsItalic}
+                            getIsUnderline={getIsUnderline}
+                        />
+            }
           </div>
           <div className="editor">
-
-            {textBtn && (
-              <Text
-                getFont={getFont}
-                getSize={getSize}
-                getIsBold={getIsBold}
-                getIsItalic={getIsItalic}
-                getIsUnderline={getIsUnderline}
-              />
-            )}
-          </div>
-          <div className="editor">
-            <canvas
-              width="1300"
-              height="1920"
-              ref={canvasId}
-              className="canvas"
-              id="canvas"
-              style={{ width: "600px", height: "800px", backgroundColor: "white" }}
-              type="file"
-              name="imageFile"
-              accept="image/jpeg, image/jp, image/png"
-            />
+            <body>
+                <canvas
+                width="1300"
+                height="1920"
+                ref={canvasId}
+                className="canvas"
+                id="canvas"
+                style={{ width: "600px", height: "800px", backgroundColor: "white" }}
+                type="file"
+                name="imageFile"
+                accept="image/jpeg, image/jp, image/png"
+                />
+            </body>
 
           </div>
 
@@ -233,5 +248,6 @@ const Editor = () => {
 
   );
 };
+
 
 export default Editor;
