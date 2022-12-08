@@ -72,4 +72,3 @@ function Text({getFont, getSize, getIsBold, getIsItalic, getIsUnderline}) {
 }
 
 export default Text;
-

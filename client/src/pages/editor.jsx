@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // 이미지 파일
 import logo from "../images/logo.png";
@@ -14,8 +14,8 @@ import layoutIcon2 from "../images/icon/layout-2.png";
 import messageIcon2 from "../images/icon/message-2.png";
 import textIcon2 from "../images/icon/text-2.png";
 
-// 말풍선 svg 파일
-// import { ReactComponent as Bubble1 } from "../images/bubble/bubble1.svg";
+
+
 
 // css 파일
 import "../styles/css/editor.css";
@@ -25,7 +25,7 @@ import Frame from "../components/Frame";
 import Picture from "../components/Picture";
 import SpeechBubble from "../components/SpeechBubble";
 import Text from "../components/Text";
-import { useEffect } from "react";
+
 
 const Editor = () => {
 
@@ -41,7 +41,7 @@ const Editor = () => {
     setBubbleBtn(false);
     setTextBtn(false);
 
-    switch (btn) {
+    switch(btn){
       case "Frame":
         setFrameBtn(true);
         break;
@@ -55,7 +55,7 @@ const Editor = () => {
         setTextBtn(true);
         break;
     }
-  };
+  }
 
   // Text 기능
   const [font, setFont] = useState("inter");
@@ -109,64 +109,145 @@ const Editor = () => {
 //     writeText({ text: ~~~~value ~~~~, x: 18, y: 70 });
 //     }, []);
 
+// -------------------------- 민혁 파트 -------------------------
+  
+  const canvasId = React.useRef(null);
+
+  var x = 300;
+  var y = 300;
+  var width;
+  var height;
+  var canvas;
+  var ctx;
+  const img = new Image();
+  img.src = "bubble/bubble1-squ.png";
+
+
+  const createBubble = (x, y, width, height) => {
+    var canvas = canvasId.current;
+    var ctx = canvas.getContext('2d');
+
+    ctx.clearRect(x, y, width, height);
+    ctx.beginPath();
+
+    ctx.drawImage(img, x, y, width, height);
+    
+    return (width, height)
+  }
+
+  const canvasOnmousedown = () => {
+    var canvas = canvasId.current;
+    var ctx = canvas.getContext('2d');
+
+
+    canvas.onmousedown = function(){
+      var canvas = canvasId.current;
+      var ctx = canvas.getContext('2d');
+  
+      canvas.onmousemove = function(event){
+        
+        var x = event.clientX - ctx.canvas.offsetLeft;
+        var y = event.clientY - ctx.canvas.offsetTop;
+        
+        createBubble(x, y, width, height);
+      }
+    }
+  }
+
+  const removeBubble = () => {
+    var canvas = canvasId.current;
+    var ctx = canvas.getContext('2d');
+
+    ctx.clearRect(x, y, 500, 500);
+    ctx.beginPath();
+  }
+
+// -------------------------- 민혁 파트 끝 -------------------------
 
 
   return (
     <div id="editor">
       <header>
         <div className="r_IconBox iconBox">
-          <button className="layout" type="button" onClick={() => btnControl("Frame")}>
+          <button className="layout" type="button" onClick={()=>btnControl('Frame')}>
             {frameBtn ? <img src={layoutIcon} /> : <img src={layoutIcon2} />}
           </button>
-          <button className="camera" type="button" onClick={() => btnControl("Picture")}>
+          <button className="camera" type="button" onClick={()=>btnControl('Picture')} >
             {pictureBtn ? <img src={cameraIcon2} /> : <img src={cameraIcon} />}
           </button>
-          <button className="message" type="button" onClick={() => btnControl("Bubble")}>
+          <button className="message" type="button" onClick={()=>btnControl('Bubble')} >
             {bubbleBtn ? <img src={messageIcon2} /> : <img src={messageIcon} />}
           </button>
-          <button className="text" type="button" onClick={() => btnControl("Text")}>
+          <button className="text" type="button" onClick={()=>btnControl('Text')}>
             {textBtn ? <img src={textIcon2} /> : <img src={textIcon} />}
           </button>
         </div>
-
         <div className="logo">
           <img src={logo} alt="logo.png" />
         </div>
         <div className="l_IconBox iconBox">
-          <button className="save" type="button">
+          <button className="save" type="button"
+                  onClick={() => {
+                    canvasOnmousedown();
+                  }}
+                  >
             <img src={saveIcon} alt="save.png" />
           </button>
-          <button className="share" type="button">
+          <button className="share" type="button"
+                  onClick={() => {
+                    createBubble(x, y, width=500, height=500);
+                  }}
+                  >
             <img src={shareIcon} alt="share.png" />
           </button>
-          <button className="download" type="button">
+          <button className="download" type="button"
+                                    // onClick={() => {
+                                    //   removeBubble();
+                                    // }}
+                                    >
             <img src={downloadIcon} alt="download.png" />
           </button>
         </div>
       </header>
       <section>
         <div className="sectionBox">
+
           <div className="sidebar">
             {frameBtn && <Frame />}
             {pictureBtn && <Picture />}
             {bubbleBtn && <SpeechBubble />}
             {textBtn && <Text
-            getFont={getFont}
-            getSize={getSize}
-            getIsBold={getIsBold}
-            getIsItalic={getIsItalic}
-            getIsUnderline={getIsUnderline}
-            />}
+                            getFont={getFont}
+                            getSize={getSize}
+                            getIsBold={getIsBold}
+                            getIsItalic={getIsItalic}
+                            getIsUnderline={getIsUnderline}
+                        />
+            }
           </div>
           <div className="editor">
             <body>
-            <canvas  className="canvas" id="canvas" style= {{width: '300px', height: '400px', backgroundColor: 'white' }} type='file' name='imageFile' accept='image/jpeg, image/jp, image/png'></canvas>
+                <canvas
+                width="1300"
+                height="1920"
+                ref={canvasId}
+                className="canvas"
+                id="canvas"
+                style={{ width: "440px", height: "580px", backgroundColor: "white" }}
+                type="file"
+                name="imageFile"
+                accept="image/jpeg, image/jp, image/png"
+                />
             </body>
+
           </div>
+
         </div>
       </section>
     </div>
+
   );
 };
+
 
 export default Editor;

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import './App.css';
 import Editor from './pages/Editor'
 import { Route, Routes } from 'react-router-dom'
