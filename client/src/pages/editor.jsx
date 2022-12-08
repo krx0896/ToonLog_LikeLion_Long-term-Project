@@ -28,11 +28,8 @@ import Text from "../components/Text";
 import { useEffect } from "react";
 
 const Editor = () => {
-<<<<<<< Updated upstream
-=======
 
   // Icon Button 관리
->>>>>>> Stashed changes
   const [frameBtn, setFrameBtn] = useState(true);
   const [pictureBtn, setPictureBtn] = useState(false);
   const [bubbleBtn, setBubbleBtn] = useState(false);
@@ -107,10 +104,10 @@ const Editor = () => {
   //   ctx.stroke();
   // }
 
-  // useEffect(() => {
-  //   writeText({ text: 'input box', x: 28, y: 70 });
-  //   // writeText({ text: ~~~~value ~~~~, x: 18, y: 70 });
-  // }, []);
+//   useEffect(() => {
+//     writeText({ text: 'input box', x: 28, y: 70 });
+//     writeText({ text: ~~~~value ~~~~, x: 18, y: 70 });
+//     }, []);
 
 
 
@@ -162,20 +159,9 @@ const Editor = () => {
             />}
           </div>
           <div className="editor">
-<<<<<<< Updated upstream
-            <canvas
-              className="canvas"
-              id="canvas"
-              style={{ width: "600px", height: "800px", backgroundColor: "white" }}
-              type="file"
-              name="imageFile"
-              accept="image/jpeg, image/jp, image/png"
-            ></canvas>
-=======
             <body>
             <canvas  className="canvas" id="canvas" style= {{width: '300px', height: '400px', backgroundColor: 'white' }} type='file' name='imageFile' accept='image/jpeg, image/jp, image/png'></canvas>
             </body>
->>>>>>> Stashed changes
           </div>
         </div>
       </section>
