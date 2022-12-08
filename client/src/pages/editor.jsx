@@ -27,7 +27,6 @@ import SpeechBubble from "../components/SpeechBubble";
 import Text from "../components/Text";
 
 const Editor = () => {
-
   const [frameBtn, setFrameBtn] = useState(true);
   const [pictureBtn, setPictureBtn] = useState(false);
   const [bubbleBtn, setBubbleBtn] = useState(false);
@@ -78,12 +77,53 @@ const Editor = () => {
     
     return (width, height)
   }
+
+  const getFont = (font) => {
+    setFont(font);
+  };
+  const getSize = (size) => {
+    setSize(size);
+  };
+  const getIsBold = (isBold) => {
+    setIsBold(isBold);
+  };
+  const getIsItalic = (isItalic) => {
+    setIsItalic(isItalic);
+  };
+  const getIsUnderline = (isUnderline) => {
+    setIsUnderline(isUnderline);
+  };
+
+  // canvas 기능
+
+  // useEffect(() => {
+  //   const canvasEle = canvas.current;
+  //   canvasEle.width = canvasEle.clientWidth;
+  //   canvasEle.height = canvasEle.clientHeight;
+
+  //   ctx = canvasEle.getContext("2d");
+  // }, []);
+
+  // const writeText = (info, style = {}) => {
+  //   const { text, x, y } = info;
+  //   const { fontSize = 20, fontFamily = 'Arial', color = 'black', textAlign = 'left', textBaseline = 'top' } = style;
+  //   // const { fontSize = size, fontFamily = font, color = 'black', textAlign = 'left', textBaseline = 'top' } = style;
+
+  //   ctx.beginPath();
+  //   ctx.font = fontSize + 'px ' + fontFamily;
+  //   ctx.textAlign = textAlign;
+  //   ctx.textBaseline = textBaseline;
+  //   ctx.fillStyle = color;
+  //   ctx.fillText(text, x, y);
+  //   ctx.stroke();
+
   // }
   
 
   const canvasOnmousedown = () => {
     var canvas = canvasId.current;
     var ctx = canvas.getContext('2d');
+
 
     canvas.onmousedown = function(){
       var canvas = canvasId.current;
@@ -162,13 +202,27 @@ const Editor = () => {
           </div>
           <div className="editor">
 
-
+            {textBtn && (
+              <Text
+                getFont={getFont}
+                getSize={getSize}
+                getIsBold={getIsBold}
+                getIsItalic={getIsItalic}
+                getIsUnderline={getIsUnderline}
+              />
+            )}
+          </div>
+          <div className="editor">
             <canvas
               width="1300"
               height="1920"
               ref={canvasId}
               className="canvas"
-              style= {{width: '450px', height: '600px', backgroundColor: 'white' }}
+              id="canvas"
+              style={{ width: "600px", height: "800px", backgroundColor: "white" }}
+              type="file"
+              name="imageFile"
+              accept="image/jpeg, image/jp, image/png"
             />
 
           </div>
