@@ -1,0 +1,81 @@
+.firstLine {
+  width: 22vw;
+  min-width: 186px;
+  margin-top: 30px;
+}
+.firstLine .font {
+  height: 40px;
+  padding-left: 10px;
+  border-radius: 8px;
+  border-color: #C7C7C7;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("../vector.png") no-repeat right 16px center;
+  width: 15vw;
+  min-width: 110px;
+}
+.firstLine .font select::-ms-expand {
+  display: none;
+}
+.firstLine .size {
+  height: 40px;
+  padding-left: 10px;
+  border-radius: 8px;
+  border-color: #C7C7C7;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("../vector.png") no-repeat right 16px center;
+  width: 6vw;
+  min-width: 60px;
+  float: right;
+}
+.firstLine .size select::-ms-expand {
+  display: none;
+}
+
+.secondLine {
+  width: 22vw;
+  min-width: 186px;
+}
+.secondLine .firstPiece {
+  float: left;
+  margin-top: 15px;
+}
+.secondLine .firstPiece button {
+  height: 40px;
+  width: 62px;
+  border: 1px solid #C7C7C7;
+}
+.secondLine .firstPiece .b {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.secondLine .firstPiece .u {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.secondLine .secondPiece {
+  float: right;
+  margin-top: 15px;
+}
+.secondLine .secondPiece button {
+  height: 40px;
+  width: 110px;
+  border-radius: 8px;
+  border: 1px solid #C7C7C7;
+}
+.secondLine .secondPiece .colorIcon {
+  float: left;
+  margin-left: 28px;
+  margin-top: 2px;
+}
+.secondLine .secondPiece .rect {
+  width: 22px;
+  height: 22px;
+  float: right;
+  border-radius: 4px;
+  margin-right: 28px;
+  background-color: black;
+}

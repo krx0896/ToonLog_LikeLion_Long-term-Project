@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // 이미지 파일
 import logo from "../images/logo.png";
@@ -201,9 +201,9 @@ const Editor = () => {
             <img src={shareIcon} alt="share.png" />
           </button>
           <button className="download" type="button"
-                                    onClick={() => {
-                                      removeBubble();
-                                    }}
+                                    // onClick={() => {
+                                    //   removeBubble();
+                                    // }}
                                     >
             <img src={downloadIcon} alt="download.png" />
           </button>
@@ -233,7 +233,7 @@ const Editor = () => {
                 ref={canvasId}
                 className="canvas"
                 id="canvas"
-                style={{ width: "600px", height: "800px", backgroundColor: "white" }}
+                style={{ width: "440px", height: "580px", backgroundColor: "white" }}
                 type="file"
                 name="imageFile"
                 accept="image/jpeg, image/jp, image/png"
