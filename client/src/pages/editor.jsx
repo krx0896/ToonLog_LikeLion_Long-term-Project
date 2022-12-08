@@ -78,18 +78,6 @@ const Editor = () => {
     
     return (width, height)
   }
-
-  // canvas.onmousedown = function(){
-  //   var canvas = canvasId.current;
-  //   var ctx = canvas.getContext('2d');
-
-  //   canvas.onmousemove = function(event){
-      
-  //     var x = event.clientX - ctx.canvas.offsetLeft;
-  //     var y = event.clientY - ctx.canvas.offsetTop;
-      
-  //     createBubble(x, y, width, height);
-  //   }
   // }
   
 
