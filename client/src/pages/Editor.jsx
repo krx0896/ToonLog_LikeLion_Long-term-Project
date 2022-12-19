@@ -14,9 +14,6 @@ import layoutIcon2 from "../images/icon/layout-2.png";
 import messageIcon2 from "../images/icon/message-2.png";
 import textIcon2 from "../images/icon/text-2.png";
 
-
-
-
 // css 파일
 import "../styles/css/editor.css";
 
@@ -25,7 +22,6 @@ import Frame from "../components/Frame";
 import Picture from "../components/Picture";
 import SpeechBubble from "../components/SpeechBubble";
 import Text from "../components/Text";
-
 
 const Editor = () => {
 
@@ -57,59 +53,7 @@ const Editor = () => {
     }
   }
 
-  // Text 기능
-  const [font, setFont] = useState("inter");
-  const [size, setSize] = useState(12);
-  const [isBold, setIsBold] = useState(false);
-  const [isItalic, setIsItalic] = useState(false);
-  const [isUnderline, setIsUnderline] = useState(false);
-
-  const getFont = (font) => {
-    setFont(font);
-  }
-  const getSize = (size) => {
-    setSize(size);
-  }
-  const getIsBold = (isBold) => {
-    setIsBold(isBold);
-  }
-  const getIsItalic = (isItalic) => {
-    setIsItalic(isItalic);
-  }
-  const getIsUnderline = (isUnderline) => {
-    setIsUnderline(isUnderline);
-  }
-
-  // canvas 기능
-  
-  // useEffect(() => {
-  //   const canvasEle = canvas.current;
-  //   canvasEle.width = canvasEle.clientWidth;
-  //   canvasEle.height = canvasEle.clientHeight;
-
-  //   ctx = canvasEle.getContext("2d");
-  // }, []);
-
-  // const writeText = (info, style = {}) => {
-  //   const { text, x, y } = info;
-  //   const { fontSize = 20, fontFamily = 'Arial', color = 'black', textAlign = 'left', textBaseline = 'top' } = style;
-  //   // const { fontSize = size, fontFamily = font, color = 'black', textAlign = 'left', textBaseline = 'top' } = style;
-
-  //   ctx.beginPath();
-  //   ctx.font = fontSize + 'px ' + fontFamily;
-  //   ctx.textAlign = textAlign;
-  //   ctx.textBaseline = textBaseline;
-  //   ctx.fillStyle = color;
-  //   ctx.fillText(text, x, y);
-  //   ctx.stroke();
-  // }
-
-//   useEffect(() => {
-//     writeText({ text: 'input box', x: 28, y: 70 });
-//     writeText({ text: ~~~~value ~~~~, x: 18, y: 70 });
-//     }, []);
-
-// -------------------------- 민혁 파트 -------------------------
+  // -------------------------- 민혁 파트 -------------------------
   
   const canvasId = React.useRef(null);
 
@@ -162,8 +106,148 @@ const Editor = () => {
     ctx.beginPath();
   }
 
-// -------------------------- 민혁 파트 끝 -------------------------
+  // -------------------------- 민혁 파트 끝 -------------------------
 
+  // -------------------------- 윤 파트 -------------------------
+
+  const [font, setFont] = useState("sans-serif");
+  const [size, setSize] = useState(20);
+  const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
+  const [isUnderline, setIsUnderline] = useState(false);
+  const [isOkClicked, setIsOkClicked] = useState(false);
+  const [isClr, setIsClr] = useState('');
+
+  const getFont = (font) => {
+    setFont(font);
+  }
+  const getSize = (size) => {
+    setSize(size);
+  }
+  const getIsBold = (isBold) => {
+    setIsBold(isBold);
+  }
+  const getIsItalic = (isItalic) => {
+    setIsItalic(isItalic);
+  }
+  const getIsUnderline = (isUnderline) => {
+    setIsUnderline(isUnderline);
+  }
+  const getIsOkClicked = (isOkClicked) => {
+    setIsOkClicked(isOkClicked);
+  }
+  const getIsClr = (isClr) => {
+    setIsClr(isClr);
+  }
+  
+  var hasInput = false;
+
+  const createText = (e) => {
+    if (hasInput) return;
+    addInput(60,40);
+  }
+
+  if (isOkClicked) {
+    createText();
+  }
+
+  function addInput(x, y) {
+    var textbox = document.createElement('div');
+    textbox.id = 'textbox';
+
+    var input = document.createElement('textarea');
+    input.id = 'inputbox';
+
+    textbox.appendChild(input);
+
+    input.style.position = 'absolute';
+
+    input.style.left = (x - 4) + '%'; 
+    input.style.top = (y - 4) + '%';
+
+    input.style.fontFamily = font;
+    input.style.fontSize = size + "px";
+    input.style.width = '150px';
+    input.style.height = '80px';
+    input.style.resize = 'none';
+
+    input.onkeydown = handleEnter;
+    document.body.appendChild(textbox);
+    hasInput = true;
+  }
+
+  function handleEnter(e) { 
+    var keyCode = e.keyCode;
+    var inputbox = document.getElementById('inputbox');
+    let posX = 0;
+    let posY = 0;
+    inputbox.style.fontFamily = font;
+    inputbox.style.fontSize = size + 'px';
+
+    if (keyCode === 13) {
+      const inputbox = document.getElementById('inputbox');
+      const textbox = document.getElementById('textbox');
+      var canvas = canvasId.current;
+      inputbox.readOnly = true;
+
+      function move(e) { // 클릭한 위치로 textarea 이동
+        posX = e.clientX;
+        posY = e.clientY;
+        inputbox.style.left = posX-75 + "px"; 
+        inputbox.style.top = posY-40 + "px"; 
+      }
+
+      function fix(e) {
+        // (http://www.soen.kr/html5/html3/4-2-4.htm)
+
+        if (posX==0 && posY==0) { 
+          posX = inputbox.getBoundingClientRect().left + 75;
+          posY = inputbox.getBoundingClientRect().top + 40;
+        }
+        const tmp = canvas.getBoundingClientRect();
+        const tmpX = (posX-tmp.left)*(canvas.width/tmp.width);
+        const tmpY = (posY-tmp.top)*(canvas.height/tmp.height);
+
+        drawText(this.value, tmpX-220, tmpY-105);
+
+        document.body.removeChild(textbox);
+        hasInput = false;
+      }
+      canvas.onmousedown = move;
+      inputbox.onclick = fix;
+    }
+  }
+
+  function drawText(txt, x, y) {
+    var canvas = canvasId.current;
+    var ctx = canvas.getContext('2d');
+    var fontStyle = [];
+
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
+
+    if (isItalic) {
+      fontStyle.push('italic ');
+    }
+    if (isBold) {
+      fontStyle.push('bold ');
+    }
+
+    fontStyle.push(size * 3 + 'px ' + font);
+    fontStyle = fontStyle.join('');
+    ctx.font = fontStyle;
+    ctx.fillStyle = isClr;
+
+    if (isUnderline) {
+      var dim = ctx.measureText(txt).width;
+      ctx.fillRect(x-4, y-4+45, dim,2);
+    }
+
+    ctx.fillText(txt, x - 4, y - 4);
+    setIsOkClicked(false);
+  }
+
+  // -------------------------- 윤 파트 끝 -------------------------
 
   return (
     <div id="editor">
@@ -178,7 +262,9 @@ const Editor = () => {
           <button className="message" type="button" onClick={()=>btnControl('Bubble')} >
             {bubbleBtn ? <img src={messageIcon2} /> : <img src={messageIcon} />}
           </button>
-          <button className="text" type="button" onClick={()=>btnControl('Text')}>
+          <button className="text" type="button" onClick={()=> {
+            btnControl('Text');
+          }}>
             {textBtn ? <img src={textIcon2} /> : <img src={textIcon} />}
           </button>
         </div>
@@ -222,6 +308,9 @@ const Editor = () => {
                             getIsBold={getIsBold}
                             getIsItalic={getIsItalic}
                             getIsUnderline={getIsUnderline}
+                            getIsOkClicked={getIsOkClicked}
+                            isOk={isOkClicked}
+                            getIsClr={getIsClr}
                         />
             }
           </div>
@@ -233,15 +322,13 @@ const Editor = () => {
                 ref={canvasId}
                 className="canvas"
                 id="canvas"
-                style={{ width: "440px", height: "580px", backgroundColor: "white" }}
+                style={{ width: "433px", height: "640px", backgroundColor: "white" }} // * width:height 비율 꼭 1300:1920 비로 맞춰주세요!
                 type="file"
                 name="imageFile"
                 accept="image/jpeg, image/jp, image/png"
                 />
             </body>
-
           </div>
-
         </div>
       </section>
     </div>
