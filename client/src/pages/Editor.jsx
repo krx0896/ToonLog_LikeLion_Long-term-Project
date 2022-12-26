@@ -13,6 +13,7 @@ import cameraIcon2 from "../images/icon/camera-2.png";
 import layoutIcon2 from "../images/icon/layout-2.png";
 import messageIcon2 from "../images/icon/message-2.png";
 import textIcon2 from "../images/icon/text-2.png";
+import spLogo from '../images/splash/splash_logo.gif';
 
 // css 파일
 import "../styles/css/editor.css";
@@ -302,6 +303,7 @@ const Editor = () => {
 
     input.style.fontFamily = font;
     input.style.fontSize = size + "px";
+    input.style.color = isClr;
     input.style.width = "150px";
     input.style.height = "80px";
     input.style.resize = "none";
@@ -383,10 +385,31 @@ const Editor = () => {
     setIsOkClicked(false);
   }
 
+  // down
+  const down = () => {
+    var canvas = document.getElementById('canvas');
+    var image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");  
+
+    const $link = document.createElement("a");
+    $link.download = `cartoonLog.jpg`;
+    $link.href = canvas.toDataURL("image/png");
+    $link.click();
+  }
+
+  // splash 
+  const splash = useRef(null);
+
+  setTimeout(function() {
+    splash.current.remove();
+  }, 5800);
+
   // -------------------------- 윤 파트 끝 -------------------------
 
   return (
     <div id="editor">
+      <div id="splash" ref={splash}>
+        <img id="spLogo" src={spLogo} />
+      </div>
       <header>
         <div className="r_IconBox iconBox">
           <button className="layout" type="button" onClick={() => btnControl("Frame")}>
@@ -409,7 +432,7 @@ const Editor = () => {
           </button>
         </div>
         <div className="logo">
-          <img src={logo} alt="logo.png" />
+          <img src={logo} alt="logo.png" style={{width: '100px', height: '56px'}}/>
         </div>
         <div className="l_IconBox iconBox">
           <button
@@ -433,9 +456,9 @@ const Editor = () => {
           <button
             className="download"
             type="button"
-            // onClick={() => {
-            //   removeBubble();
-            // }}
+            onClick={() => {
+              down();
+            }}
           >
             <img src={downloadIcon} alt="download.png" />
           </button>

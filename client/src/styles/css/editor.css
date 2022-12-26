@@ -4,6 +4,19 @@
   padding: 0;
 }
 
+#splash {
+  background-color: #FF9800;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+#splash #spLogo {
+  width: 60%;
+  margin: auto;
+  display: block;
+}
+
 #root {
   width: 100vw;
   height: 100vh;

@@ -27,20 +27,13 @@ function Text({getFont, getSize, getIsBold, getIsItalic, getIsUnderline, getIsOk
       colorInfo.current.style.backgroundColor = color.hex;
   }
 
-
-  // if (isOkClicked) { // textarea가 만들어지고 text가 적용되기 전까지는 버튼들 비활성화
-  //   for (var i=0;i<6;i++) {
-  //     optionInfo.current[i].disabled = true;
-  //   }
-  // }
-
   return (
     <>
       <div className="firstLine">
         <form method="post">
           <select name='font' className="font" onChange={(e) => getFont(e.target.value)} ref={el => (optionInfo.current[0] = el)}>
             <option value='sans-serif'>sans-serif</option>
-            <option value='others'>others</option>
+            <option value='Gulim'>굴림</option>
           </select>
           <select name='size' className="size" value="20" onChange={(e) => getSize(e.target.value)} ref={el => (optionInfo.current[1] = el)}>
             <option value='10'>10</option>
