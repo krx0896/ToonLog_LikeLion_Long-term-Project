@@ -1,0 +1,12 @@
+.sidebar > section {
+  width: 100%;
+  margin-top: 10%;
+}
+.sidebar > section .frame_box {
+  display: flex;
+  justify-content: space-evenly;
+}
+.sidebar > section .frame_box button {
+  border: none;
+  outline: none;
+}
