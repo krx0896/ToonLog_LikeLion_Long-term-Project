@@ -1,0 +1,16 @@
+.sidebar {
+    >section {
+        width: 100%;
+        margin-top: 10%;
+
+        .frame_box {
+            display: flex;
+            justify-content: space-evenly;
+
+            button {
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
