@@ -71,6 +71,7 @@
   width: 25%;
   min-width: 200px;
   height: calc(100% - 4px);
+  padding-bottom: 0;
 }
 #root #editor section .sectionBox .sidebar .inputbox {
   width: 83%;

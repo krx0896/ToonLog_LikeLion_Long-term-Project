@@ -94,6 +94,7 @@ $icon_gap: 30px;
                     width: $sidebar_width;
                     min-width: 200px;
                     height: calc(100% - ($ecpt_border/2));
+                    padding-bottom: 0;
 
                     // 왼쪽 사이드 검색바
                     .inputbox {
