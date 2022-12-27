@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 
 import "../styles/css/picture.css";
 
-const Picture = () => {
+const Picture = ({getIsPicture, getImgSrc}) => {
 
     //파일 미리볼 url을 저장해줄 state
     const [fileImage, setFileImage] = useState('');
     const [enters, setEnters] = useState([]);
+
+    
 
     // 파일 저장
     const saveFileImage = e => {
@@ -21,6 +23,27 @@ const Picture = () => {
     //   URL.revokeObjectURL(fileImage);
     //   setFileImage("");
     // };
+
+    
+
+
+    // const createPicture = (index) => {
+
+    //   // ctx.clearRect(locationSet, locationSet, bubbleWidth[0], bubbleWidth[0]);
+    //   ctxValue.drawImage(img, (locationSet-(bubbleWidth[0]/2)), (locationSet-(bubbleHeight[0]/2)), bubbleWidth[0], bubbleHeight[0]);
+  
+    //   bubble1X = locationSet
+    //   bubble1Y = locationSet
+    //   buubleTrue[0] = true;
+  
+    //   // ctx.beginPath();
+    //   // ctx.arc(x, y, 10, 0, 10*Math.PI);
+    //   // ctx.stroke();
+    
+    // }
+
+    const [isPicture, setIsPicture] = useState(false);
+
 
     return (
       <>
@@ -44,8 +67,12 @@ const Picture = () => {
 
             <div className="imgFile-content-container">
                 {fileImage && (
-                  enters.map(ent => (<img src={ent} alt="imgFile" className="imgFile-content"/>))
+                  enters.map((ent,index) => (
+                    <button id='imgFile' type="button" onClick={() => {setIsPicture(true); {getIsPicture(true); getImgSrc(enters[index])}}}>
+                      <img src={ent} alt="imgFile" className="imgFile-content"/>
+                    </button>))
                 )}
+                <button type="button" onClick={() => {setIsPicture(true); {getIsPicture(true);}}}>테스트</button>
                 {/* {fileImage && (
                 <img
                   alt="img"

@@ -13,7 +13,7 @@ import cameraIcon2 from "../images/icon/camera-2.png";
 import layoutIcon2 from "../images/icon/layout-2.png";
 import messageIcon2 from "../images/icon/message-2.png";
 import textIcon2 from "../images/icon/text-2.png";
-import spLogo from '../images/splash/splash_logo.gif';
+import spLogo from "../images/splash/splash_logo.gif";
 
 // css 파일
 import "../styles/css/editor.css";
@@ -56,7 +56,19 @@ const Editor = () => {
   // -------------------------- 민혁 파트 -------------------------
 
   const [ ctxValue, setCtx ] = useState();
+  const [isPicture, setIsPicture] = useState(false);
+  const [isImgSrc, setImgSrc] = useState(false);
+  const [frameNum, setFrame] = useState(false);
   const canvasId = React.useRef(null);
+
+  const getIsPicture = (isPicture) => {
+    setIsPicture(isPicture);
+  };
+
+  const getImgSrc = (isImgSrc) => {
+    setImgSrc(isImgSrc);
+  };
+
 
   let locationSet = 650
   var bubbleWidth = [584, 100, 200];
@@ -68,6 +80,10 @@ const Editor = () => {
 
   var mouseOn_x = 0;
   var mouseOn_y = 0;
+
+  var FrameWidth = [1290, 100, 200];
+  var FrameHeight = [480, 100, 200];
+
 
   const img = new Image();
   
@@ -114,6 +130,103 @@ const Editor = () => {
     }
     });
 
+  // var check = false;
+
+  // const createCheck = (e) => {
+  //   if (check) return;
+  //   createPicture();
+  // };
+
+  const createPicture = () => {
+    const UploadImg = new Image();
+    UploadImg.src = isImgSrc;
+    // UploadImg.width
+
+    ctxValue.clearRect(0, 0, 1300, 1920);
+
+    // 오른쪽 값이 더 크면 이미지의 너비 비율이 더 큼 => 이미지의 높이에 맞춰야함
+    if (1290/480 > UploadImg.width / UploadImg.height) {
+      ctxValue.drawImage(UploadImg,
+        0, 0, 1300, 1300/UploadImg.width*UploadImg.height)
+    }
+    else {
+      ctxValue.drawImage(UploadImg,
+        0, 0, 480/UploadImg.height*UploadImg.width, 480)
+    }
+    // ctxValue.drawImage(UploadImg,
+    //   0, 0, bubbleWidth[0], bubbleHeight[0]);
+
+    ctxValue.clearRect(0, 490, 1300, 1920);
+
+    ctxValue.beginPath();
+    ctxValue.moveTo(10, 10);
+    ctxValue.lineTo(1290, 10);
+    ctxValue.lineTo(1290, 480);
+    ctxValue.lineTo(10, 480);
+    ctxValue.closePath();
+    ctxValue.lineWidth = 20;
+    ctxValue.strokeStyle = "black";
+    ctxValue.stroke();
+
+    ctxValue.beginPath();
+    ctxValue.moveTo(10, 510);
+    ctxValue.lineTo(200, 510);
+    ctxValue.lineTo(400, 1330);
+    ctxValue.lineTo(10, 1330);
+    ctxValue.closePath();
+    ctxValue.lineWidth = 20;
+    ctxValue.strokeStyle = "black";
+    ctxValue.stroke();
+
+    ctxValue.beginPath();
+    ctxValue.moveTo(230, 510);
+    ctxValue.lineTo(930, 510);
+    ctxValue.lineTo(860, 1330);
+    ctxValue.lineTo(430, 1330);
+    ctxValue.closePath();
+    ctxValue.lineWidth = 20;
+    ctxValue.strokeStyle = "black";
+    ctxValue.stroke();
+
+    ctxValue.beginPath();
+    ctxValue.moveTo(960, 510);
+    ctxValue.lineTo(1290, 510);
+    ctxValue.lineTo(1290, 1330);
+    ctxValue.lineTo(890, 1330);
+    ctxValue.closePath();
+    ctxValue.lineWidth = 20;
+    ctxValue.strokeStyle = "black";
+    ctxValue.stroke();
+
+    ctxValue.beginPath();
+    ctxValue.moveTo(10, 1360);
+    ctxValue.lineTo(530, 1360);
+    ctxValue.lineTo(530, 1910);
+    ctxValue.lineTo(10, 1910);
+    ctxValue.closePath();
+    ctxValue.lineWidth = 20;
+    ctxValue.strokeStyle = "black";
+    ctxValue.stroke();
+
+    ctxValue.beginPath();
+    ctxValue.moveTo(560, 1360);
+    ctxValue.lineTo(1290, 1360);
+    ctxValue.lineTo(1290, 1910);
+    ctxValue.lineTo(560, 1910);
+    ctxValue.closePath();
+    ctxValue.lineWidth = 20;
+    ctxValue.strokeStyle = "black";
+    ctxValue.stroke();
+
+    setIsPicture(false);
+  }
+
+  if (isPicture) {
+    createPicture();
+  }
+
+
+  
   const createBubble = () => {
 
     // ctx.clearRect(locationSet, locationSet, bubbleWidth[0], bubbleWidth[0]);
@@ -180,6 +293,7 @@ const Editor = () => {
   //   ctx.beginPath();
   // }
 
+
   // -------------------------- 민혁 파트 끝 -------------------------
 
   // -------------------------- 정우 파트 -------------------------
@@ -191,7 +305,7 @@ const Editor = () => {
     let ctx = canvas.getContext("2d");
 
     frame1.addEventListener("click", () => {
-      // ctx.clearRect(0, 0, 1300, 1920);
+      ctx.clearRect(0, 0, 1300, 1920);
 
       ctx.beginPath();
       ctx.moveTo(10, 10);
@@ -252,6 +366,7 @@ const Editor = () => {
       ctx.lineWidth = 20;
       ctx.strokeStyle = "black";
       ctx.stroke();
+      frameNum = 1;
     });
 
     frame2.addEventListener("click", () => {
@@ -316,7 +431,30 @@ const Editor = () => {
       ctx.lineWidth = 20;
       ctx.strokeStyle = "black";
       ctx.stroke();
+      frameNum = 2;
     });
+  };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
+  const kakaoShare = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+
+      if (!kakao.isInitialized()) {
+        kakao.init("f36e74bcfdce2322896ef5d044efabb9");
+
+        kakao.Share.sendCustom({
+          templateId: 87819,
+        });
+      }
+    }
   };
 
   // -------------------------- 정우 파트 끝 -------------------------
@@ -464,19 +602,19 @@ const Editor = () => {
 
   // down
   const down = () => {
-    var canvas = document.getElementById('canvas');
-    var image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");  
+    var canvas = document.getElementById("canvas");
+    var image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
 
     const $link = document.createElement("a");
     $link.download = `cartoonLog.jpg`;
     $link.href = canvas.toDataURL("image/png");
     $link.click();
-  }
+  };
 
-  // splash 
+  // splash
   const splash = useRef(null);
 
-  setTimeout(function() {
+  setTimeout(function () {
     splash.current.remove();
   }, 5800);
 
@@ -509,17 +647,19 @@ const Editor = () => {
           </button>
         </div>
         <div className="logo">
-          <img src={logo} alt="logo.png" style={{width: '100px', height: '56px'}}/>
+          <img src={logo} alt="logo.png" style={{ width: "100px", height: "56px" }} />
         </div>
         <div className="l_IconBox iconBox">
           <button className="save" type="button">
             <img src={saveIcon} alt="save.png" />
           </button>
-          <button className="share" type="button"
-                  onClick={() => {
-                    createBubble();
-                  }}
-                  >
+          <button
+            className="share"
+            onClick={() => {
+              kakaoShare();
+            }}
+            type="button"
+          >
             <img src={shareIcon} alt="share.png" />
           </button>
           <button
@@ -537,8 +677,15 @@ const Editor = () => {
         <div className="sectionBox">
           <div className="sidebar">
             {frameBtn && <Frame />}
-            {pictureBtn && <Picture />}
-            {bubbleBtn && <SpeechBubble />}
+            {pictureBtn && 
+              <Picture 
+                getIsPicture={getIsPicture}
+                getImgSrc={getImgSrc}
+              />}
+            {bubbleBtn && 
+              <SpeechBubble 
+                // getIsPicture={getIsPicture}
+              />}
             {textBtn && (
               <Text
                 getFont={getFont}
