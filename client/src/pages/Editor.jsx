@@ -13,7 +13,7 @@ import cameraIcon2 from "../images/icon/camera-2.png";
 import layoutIcon2 from "../images/icon/layout-2.png";
 import messageIcon2 from "../images/icon/message-2.png";
 import textIcon2 from "../images/icon/text-2.png";
-import spLogo from '../images/splash/splash_logo.gif';
+import spLogo from "../images/splash/splash_logo.gif";
 
 // css 파일
 import "../styles/css/editor.css";
@@ -242,6 +242,28 @@ const Editor = () => {
     });
   };
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
+  const kakaoShare = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+
+      if (!kakao.isInitialized()) {
+        kakao.init("f36e74bcfdce2322896ef5d044efabb9");
+
+        kakao.Share.sendCustom({
+          templateId: 87819,
+        });
+      }
+    }
+  };
+
   // -------------------------- 정우 파트 끝 -------------------------
 
   // -------------------------- 윤 파트 -------------------------
@@ -387,19 +409,19 @@ const Editor = () => {
 
   // down
   const down = () => {
-    var canvas = document.getElementById('canvas');
-    var image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");  
+    var canvas = document.getElementById("canvas");
+    var image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
 
     const $link = document.createElement("a");
     $link.download = `cartoonLog.jpg`;
     $link.href = canvas.toDataURL("image/png");
     $link.click();
-  }
+  };
 
-  // splash 
+  // splash
   const splash = useRef(null);
 
-  setTimeout(function() {
+  setTimeout(function () {
     splash.current.remove();
   }, 5800);
 
@@ -432,7 +454,7 @@ const Editor = () => {
           </button>
         </div>
         <div className="logo">
-          <img src={logo} alt="logo.png" style={{width: '100px', height: '56px'}}/>
+          <img src={logo} alt="logo.png" style={{ width: "100px", height: "56px" }} />
         </div>
         <div className="l_IconBox iconBox">
           <button
@@ -446,10 +468,10 @@ const Editor = () => {
           </button>
           <button
             className="share"
-            type="button"
             onClick={() => {
-              createBubble(x, y, (width = 500), (height = 500));
+              kakaoShare();
             }}
+            type="button"
           >
             <img src={shareIcon} alt="share.png" />
           </button>
