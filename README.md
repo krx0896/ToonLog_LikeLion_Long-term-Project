@@ -53,5 +53,5 @@ Project term : 2022.09.01 ~ 2022.12.28 </br>
 > 정재현
 
 ### Link
-- [(완성 서비스 페이지 링크)](cartoonblog.netlify.app)
+- [(완성 서비스 페이지 링크)](https://cartoonblog.netlify.app/)
 - [(피그마 와이어 프레임 UI 링크)](https://www.figma.com/file/XxZm4zREMR8kC2l8aHULMR/%EB%A9%8B%EC%82%AC-%EC%9E%A5%ED%94%84?type=design&node-id=212%3A80&t=V9YVoETz6ynZghPp-1)
